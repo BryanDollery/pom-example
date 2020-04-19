@@ -1,15 +1,12 @@
 package pom.pages;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
 
-public class Page {
+public abstract class Page {
     protected final WebDriver driver;
     private final String url;
 
@@ -18,16 +15,21 @@ public class Page {
         this.url = url;
     }
 
-    public void home() {
+    protected void home() {
         driver.get(url);
     }
 
-    public void fillField(String selector, String text) {
+    protected void fillField(String selector, String text) {
         driver.findElement(By.name(selector)).sendKeys(text);
     }
 
-    public void submit(String selector) {
+    protected void submit(String selector) {
         driver.findElement(By.name(selector)).click();
+    }
+
+    protected String getText(String selector) {
+        WebElement resultElement = driver.findElement(By.cssSelector(selector));
+        return resultElement.getText();
     }
 
     public void screenshot(String name) {

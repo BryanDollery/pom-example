@@ -6,22 +6,24 @@ import pom.library.Browser;
 import pom.pages.AddUserPage;
 import pom.pages.LoginPage;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoginTestCase {
 
-    public static final String SUCCESSFUL_LOGIN = "**Successful Login**";
-
-    private Browser browser = new Browser();
+    private static final Browser browser = new Browser();
 
     @Test
     public void loginWithChrome() {
-        login(browser.getChrome(), "chrome", "Usain", "Bolt");
+        WebDriver chrome = browser.getChrome();
+        login(chrome, "chrome", "Usain", "Bolt");
+        chrome.close();
     }
 
     @Test
     public void loginWithFirefox() {
-        login(browser.getFirefox(), "firefox", "Christian", "Coleman");
+        WebDriver firefox = browser.getFirefox();
+        login(firefox, "firefox", "Christian", "Coleman");
+        firefox.close();
     }
 
     private void login(WebDriver driver, String name, String username, String password) {
@@ -31,13 +33,9 @@ public class LoginTestCase {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username, password);
 
-        String results = loginPage.getResults();
-
-        if (!SUCCESSFUL_LOGIN.equals(results))
+        if (!loginPage.isSuccessfull())
             loginPage.screenshot(name + "-" + username + "-" + password);
 
-        driver.close();
-
-        assertEquals(SUCCESSFUL_LOGIN, results);
+        assertTrue(loginPage.isSuccessfull());
     }
 }

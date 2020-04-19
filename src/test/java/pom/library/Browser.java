@@ -23,5 +23,4 @@ public class Browser {
         driver.manage().window().maximize();
         return driver;
     }
-
 }
