@@ -2,6 +2,7 @@ package pom.pages;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.FluentWait;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public abstract class Page {
 
     protected String getText(String selector) {
         WebElement resultElement = driver.findElement(By.cssSelector(selector));
+
         return resultElement.getText();
     }
 
