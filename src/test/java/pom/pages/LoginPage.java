@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 public class LoginPage extends Page {
     private static final String URL = "http://thedemosite.co.uk/login.php";
     private static final String RESULT_SELECTOR = "body > table > tbody > tr > td.auto-style1 > big > blockquote > blockquote > font > center > b";
-    public static final String SUCCESSFUL_LOGIN = "**Successful Login**";
+    private static final String SUCCESSFUL_LOGIN = "**Successful Login**";
 
     public LoginPage(WebDriver driver) {
         super(driver, URL);
